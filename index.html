@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <input type="text" id="inputItem" placeholder="Insira um item">
+    <button onclick="addItem()">Adicionar</button>
+
+    <ul id="listaTarefas">
+    </ul>
+
+    <script>
+        function addItem() {
+            const input = document.getElementById("inputItem");
+            const itemText = input.value;
+
+            if (itemText === "") {
+                alert("Por favor, insira um item.");
+                return;
+            }
+
+            // Cria um novo item de lista (li)
+            const li = document.createElement("li");
+
+            // Cria um span para armazenar o texto do item
+            const span = document.createElement("span");
+            span.textContent = itemText;
+
+            // Botão Complete
+            const btnComplete = document.createElement("button");
+            btnComplete.textContent = "Complete";
+            btnComplete.onclick = function() {
+                span.classList.toggle("completed");
+            };
+
+            // Botão Delete
+            const btnDelete = document.createElement("button");
+            btnDelete.textContent = "Delete";
+            btnDelete.onclick = function() {
+                li.remove();
+            };
+
+            // Adiciona o span e os botões ao item de lista
+            li.appendChild(span);
+            li.appendChild(btnComplete);
+            li.appendChild(btnDelete);
+
+            // Adiciona o item de lista à lista
+            document.getElementById("listaTarefas").appendChild(li);
+
+            // Limpa o campo de entrada
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
